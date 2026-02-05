@@ -1,9 +1,11 @@
 ---
 
-# JAVA DEVOPS LAB
+JAVA DEVOPS LAB
 --- 
 
-## Java Build, Packaging, Classpath, and Ant - A Hands-On Learning Repository
+Java Build, Packaging, Classpath, Ant, and Documentation
+A Hands-On Learning Repository
+
 
 ## PURPOSE OF THIS REPOSITORY
 
@@ -14,16 +16,24 @@ The goal is NOT to learn Java programming in depth.
 Instead, this repository focuses on:
 
 * How Java source code turns into runnable artifacts
-* How Java applications are built, packaged, and executed
+* How Java applications are built, packaged, documented, and executed
 * How dependencies are resolved at compile-time and run-time
 * How build tools (like Apache Ant) automate repeatable builds
+* How Java documentation is generated
 * What files and folders matter in a Java project, and why
 
 This is the kind of practical, systems-level understanding expected from a DevOps engineer working with Java-based systems.
 
 ---
 
-## BIG PICTURE: HOW JAVA APPLICATIONS ARE BUILT AND RUN
+## BIG PICTURE: JAVA BUILD AND DELIVERY LIFECYCLE
+
+1. Write source code (.java)
+2. Generate documentation (javadoc)
+3. Compile source into bytecode (.class)
+4. Package bytecode into artifacts (JAR)
+5. Run artifacts using JVM
+6. Automate steps using build tools (Ant)
 
 Before touching tools or commands, it is important to understand the end-to-end lifecycle of a Java application.
 
@@ -103,18 +113,54 @@ Java applications cannot be compiled or packaged without a JDK.
 
 * javac (compiler)
 * jar (packaging tool)
+* javadoc (documentation generator)
 * java (runtime launcher)
 * debugging and tooling
 
 #### DevOps relevance:
+CI/CD systems require JDK because builds, docs, and packaging all depend on it.
 
-* CI/CD pipelines require JDK
-* Build containers require JDK
-* Developer machines require JDK
+---
 
-#### Rule of thumb:
-If a machine builds Java → JDK
-If a machine only runs Java → JRE
+## javadoc (Java Documentation Generator)
+
+#### What it is:
+A tool that generates HTML documentation directly from Java source code and comments.
+
+#### Why it exists:
+
+* Documentation stays close to code
+* Docs are versioned with source
+* Ensures public APIs are documented
+
+#### How it works:
+
+* Reads `.java` files
+* Parses class, method, and field comments
+* Generates static HTML files
+
+#### Example command:
+```
+javadoc -d doc MyClass.java
+```
+
+#### Command explanation:
+
+* javadoc → documentation tool
+* -d doc → output directory
+* MyClass.java → source file
+
+#### Generated output:
+
+* index.html (entry point)
+* Class-level documentation
+* Method and field documentation
+
+#### DevOps takeaway:
+
+* Docs generation often runs in CI
+* Broken docs = broken build
+* Confirms correct source structure and packages
 
 ---
 
