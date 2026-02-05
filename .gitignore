@@ -1,0 +1,7 @@
+# Java build outputs
+**/build/
+**/dist/
+**/*.class
+
+# macOS
+.DS_Store
